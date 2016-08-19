@@ -7,6 +7,7 @@ matrix = [[np.pi,       np.e,           np.sqrt(2),         2*np.pi, 1],
 
 
 def fgauss(matrix):
+    """ Gauss Elimination Method implemented for any given matrix.  """
     size = len(matrix)
     for k in range(size):
         for i in range(k+1, size):
@@ -18,6 +19,7 @@ def fgauss(matrix):
 
 
 def matrix_show(matrix):
+    """ Print the matrix with the right format. """
     for i in matrix:
         print('[ ', end='')
         for j in i:
