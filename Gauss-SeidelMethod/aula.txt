@@ -1,0 +1,12 @@
+Um sistema de equações tem convergência garantida quando tem DP dominante:
+(O elemento da DP tem que ser maior que a soma dos seus vizinhos, em módulo)
+(x(1,1) > x(1,2) + x(1,3) + ...)
+
+
+|A(i, i)| >= somatorio(i = 1, j != i) até n |A(i, j)|,      para todo i
+                    &&
+|A(i, i)| > somatorio(i = 1, j != i) até n |A(i, j)|,      para algum i(pelo menos um)
+
+-------------------
+Qual o erro de truncamento da sol. aproximada x?
+Erro = |VA - VE|
