@@ -1,9 +1,10 @@
-function GaussSolution = Gauss(N, A)
+function GaussSolutionPivoted = GaussPivotado(N, A)
 
 NumeroOperacoes = 0;
 % Escalonando a matrix A
 for k = 1: N-1
     for i = k+1: N
+        A = PivotPartial(N, A, k);
         aux = A(i, k)/A(k, k);
         NumeroOperacoes += 1;
         for j = k+1 : N+1
@@ -20,12 +21,12 @@ end
 aux_abs = abs(A(N, N));     % Ultimo X.
 if (aux_abs < 1e-15)
     if (abs(A(N, N+1)) < 1e-15)
-        GaussSolution(N) = 0; "Sistema Possivel Indeterminado."
+        GaussSolutionPivoted(N) = 0; "Sistema Possivel Indeterminado."
     else
-        GaussSolution(N) = NaN; "Sistema Impossivel."
+        GaussSolutionPivoted(N) = NaN; "Sistema Impossivel."
     end
 else
-    GaussSolution(N) = A(N, N+1)/A(N, N);
+    GaussSolutionPivoted(N) = A(N, N+1)/A(N, N);
     NumeroOperacoes += 1;
 end
 
@@ -33,10 +34,10 @@ end
 for i = N-1: -1: 1      % Reduzindo de 1 em 1.
     Sum = 0;
     for j = i+1: N
-        Sum = Sum + (A(i, j) * GaussSolution(j));
+        Sum = Sum + (A(i, j) * GaussSolutionPivoted(j));
         NumeroOperacoes += 2;   % Multiplicacao e soma;
     end
-    GaussSolution(i) = (A(i, N+1) - Sum)/A(i, i);
+    GaussSolutionPivoted(i) = (A(i, N+1) - Sum)/A(i, i);
     NumeroOperacoes += 2;   % Subtracao e divisao.
 end
 
