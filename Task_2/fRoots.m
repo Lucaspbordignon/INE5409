@@ -1,9 +1,9 @@
-function Roots = fRoots(P)
+function X = fRoots(P)
     grau_n = length(P) - 1;
     k = 0;
     % Salvamento de contexto
-    grau_n_original = grau_n;
-    P_original = P;
+    n_original = grau_n;
+    p_original = P;
 
     % Encontrando as raizes
     while (grau_n > 0)
@@ -13,9 +13,11 @@ function Roots = fRoots(P)
 
         % Aplicando o metodo de Newton
         % Recebendo a raiz e a multiplicidade
-        [X, M] = fNewtonPol(grau_n, P, Xi);
+        [X(k), M(k)] = fNewtonPol(grau_n, P, Xi(k));
 
+        [X(k), M(k)] = fNewtonPol(n_original, p_original, X(k));
         % Reduzindo o grau
         [grau_n, P] = fReducaoGrau(grau_n, P, X(k), M(k));
     end
+    M
 end
